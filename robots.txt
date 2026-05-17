@@ -1,0 +1,10 @@
+# Debtrex Solutions — robots.txt
+# Replace https://debtrexsolutions.com with your production domain.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /quiz.html
+Disallow: /thank-you.html
+
+Sitemap: https://debtrexsolutions.com/sitemap.xml

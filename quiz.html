@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Debt Relief Assessment | Debtrex Solutions</title>
+  <meta name="description" content="A short, confidential 2-minute assessment to see whether you may qualify for a debt relief consultation.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">D</span>
+        Debtrex Solutions
+      </a>
+      <nav class="nav-links nav-cta-only">
+        <a href="index.html" class="btn-ghost">← Back to home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="quiz-wrap">
+    <div class="quiz-container">
+
+      <div class="quiz-card">
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span id="stepLabel">Step 1 of 7</span>
+            <span id="stepPct">14%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <form id="quizForm" autocomplete="on" novalidate>
+
+          <!-- Honeypot -->
+          <div class="honeypot" aria-hidden="true">
+            <label>Leave this empty</label>
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <!-- STEP 1: Unsecured Debt Amount -->
+          <div class="step-pane active" data-step="1">
+            <h2>How much unsecured debt do you currently have?</h2>
+            <p class="step-sub">Include credit cards, personal loans, medical bills, and collections. Do not include mortgages or auto loans.</p>
+            <div class="option-grid" data-field="debt_amount">
+              <label class="option"><input type="radio" name="debt_amount" value="under_10k"> Under $10,000</label>
+              <label class="option"><input type="radio" name="debt_amount" value="10k_20k"> $10,000 – $20,000</label>
+              <label class="option"><input type="radio" name="debt_amount" value="20k_50k"> $20,000 – $50,000</label>
+              <label class="option"><input type="radio" name="debt_amount" value="50k_plus"> $50,000 or more</label>
+            </div>
+          </div>
+
+          <!-- STEP 2: Behind on Payments -->
+          <div class="step-pane" data-step="2">
+            <h2>Are you currently behind on payments?</h2>
+            <p class="step-sub">This helps determine which programs may be relevant.</p>
+            <div class="option-grid" data-field="behind_payments">
+              <label class="option"><input type="radio" name="behind_payments" value="yes"> Yes, I'm behind</label>
+              <label class="option"><input type="radio" name="behind_payments" value="occasionally"> Occasionally / sometimes</label>
+              <label class="option"><input type="radio" name="behind_payments" value="no"> No, I'm current</label>
+            </div>
+          </div>
+
+          <!-- STEP 3: Employment -->
+          <div class="step-pane" data-step="3">
+            <h2>What is your employment status?</h2>
+            <p class="step-sub">Programs generally require some form of regular income.</p>
+            <div class="option-grid" data-field="employment">
+              <label class="option"><input type="radio" name="employment" value="full_time"> Full-time</label>
+              <label class="option"><input type="radio" name="employment" value="part_time"> Part-time</label>
+              <label class="option"><input type="radio" name="employment" value="self_employed"> Self-employed</label>
+              <label class="option"><input type="radio" name="employment" value="unemployed"> Unemployed</label>
+              <label class="option"><input type="radio" name="employment" value="retired"> Retired</label>
+            </div>
+          </div>
+
+          <!-- STEP 4: Debt Type -->
+          <div class="step-pane" data-step="4">
+            <h2>What is your primary type of debt?</h2>
+            <p class="step-sub">Choose the category that represents most of your balance.</p>
+            <div class="option-grid" data-field="debt_type">
+              <label class="option"><input type="radio" name="debt_type" value="credit_cards"> Credit cards</label>
+              <label class="option"><input type="radio" name="debt_type" value="personal_loans"> Personal loans</label>
+              <label class="option"><input type="radio" name="debt_type" value="collections"> Collections</label>
+              <label class="option"><input type="radio" name="debt_type" value="medical"> Medical bills</label>
+              <label class="option"><input type="radio" name="debt_type" value="multiple"> Multiple / mixed</label>
+            </div>
+          </div>
+
+          <!-- STEP 5: State -->
+          <div class="step-pane" data-step="5">
+            <h2>What state do you live in?</h2>
+            <p class="step-sub">Available programs depend on your state of residence.</p>
+            <div class="field">
+              <label for="state">Select your state</label>
+              <select id="state" name="state">
+                <option value="">— Select a state —</option>
+                <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+                <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+                <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+                <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+                <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+                <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+                <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+                <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+                <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                <option>Wisconsin</option><option>Wyoming</option><option>District of Columbia</option>
+              </select>
+              <div class="field-error">Please select your state.</div>
+            </div>
+          </div>
+
+          <!-- STEP 6: Monthly Income -->
+          <div class="step-pane" data-step="6">
+            <h2>What is your approximate monthly household income?</h2>
+            <p class="step-sub">Net income, after taxes. This helps consultants understand your budget.</p>
+            <div class="option-grid" data-field="income">
+              <label class="option"><input type="radio" name="income" value="under_2k"> Under $2,000</label>
+              <label class="option"><input type="radio" name="income" value="2k_4k"> $2,000 – $4,000</label>
+              <label class="option"><input type="radio" name="income" value="4k_6k"> $4,000 – $6,000</label>
+              <label class="option"><input type="radio" name="income" value="6k_plus"> $6,000 or more</label>
+            </div>
+          </div>
+
+          <!-- STEP 7: Contact + Consent -->
+          <div class="step-pane" data-step="7">
+            <h2>Where should we send your results?</h2>
+            <p class="step-sub">Last step. A consultant may reach out to walk you through your options.</p>
+
+            <div class="field">
+              <label for="first_name">Full name</label>
+              <input type="text" id="first_name" name="full_name" autocomplete="name" placeholder="Jane Smith">
+              <div class="field-error">Please enter your full name.</div>
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 555-5555" inputmode="tel">
+              <div class="field-error">Please enter a valid 10-digit phone number.</div>
+            </div>
+
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
+              <div class="field-error">Please enter a valid email address.</div>
+            </div>
+
+            <div class="consent-block">
+              <label>
+                <input type="checkbox" id="tcpa_consent" name="tcpa_consent">
+                <span>
+                  <strong>By checking this box and clicking "See My Options,"</strong> I provide my express written consent for Debtrex Solutions LLC and its marketing and servicing partners to contact me at the phone number and email I provided, including by automatic telephone dialing systems, pre-recorded or artificial voice messages, SMS/text messages, and email, for marketing purposes related to debt relief consultation services. I understand that <strong>consent is not a condition of any purchase</strong>, that message and data rates may apply, that text frequency may vary, and that I can opt out of calls by saying "stop" or unsubscribe from texts by replying STOP at any time. I have read and agree to the <a href="privacy.html" target="_blank">Privacy Policy</a> and <a href="terms.html" target="_blank">Terms of Service</a>.
+                </span>
+              </label>
+              <div class="field-error" style="margin-top: 10px;">You must agree to the consent terms to continue.</div>
+            </div>
+
+            <p style="font-size: 0.78rem; color: var(--text-light); margin: 0 0 8px;">
+              Debtrex Solutions is not a law firm and is not affiliated with any government agency. Not all consumers qualify. Results vary. Debt relief programs may negatively impact credit.
+            </p>
+          </div>
+
+          <!-- NAV ROW -->
+          <div class="nav-row">
+            <button type="button" class="btn btn-ghost" id="btnBack" style="visibility: hidden;">← Back</button>
+            <button type="button" class="btn btn-primary" id="btnNext">Continue →</button>
+          </div>
+
+        </form>
+      </div>
+
+      <p style="text-align: center; font-size: 0.82rem; color: var(--text-light); margin-top: 20px;">
+        Your information is encrypted in transit and handled per our <a href="privacy.html">Privacy Policy</a>.
+      </p>
+    </div>
+  </main>
+
+  <script src="js/cookies.js"></script>
+  <script src="js/meta-pixel.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>
