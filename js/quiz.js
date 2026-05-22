@@ -41,6 +41,15 @@
   }
   const utms = captureUtms();
 
+  // === OPTION OF INTEREST =====================================
+  // Captures ?option= from per-option "Apply Now" CTAs so each lead
+  // is tagged with the debt relief path the visitor came in for.
+  function captureOption() {
+    const opt = new URLSearchParams(window.location.search).get('option');
+    return ['consolidation', 'settlement', 'bankruptcy', 'budgeting'].includes(opt) ? opt : null;
+  }
+  const optionOfInterest = captureOption();
+
   // === RENDER =================================================
   function showStep(n) {
     panes.forEach(p => p.classList.remove('active'));
@@ -207,7 +216,8 @@
       referrer: document.referrer || null,
       user_agent: navigator.userAgent,
       submitted_at: new Date().toISOString(),
-      source: 'debtrex_website_quiz_v1'
+      source: 'debtrex_website_quiz_v1',
+      option_of_interest: optionOfInterest
     };
 
     // Lock the button

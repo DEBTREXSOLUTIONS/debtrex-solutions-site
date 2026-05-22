@@ -2,10 +2,10 @@
    ============================================================
    PURPOSE
    - Accepts POST from the website quiz
-   - Forwards lead to GoHighLevel webhook (server-to-server)
+   - Sends lead details to your email via Resend
    - Fires Meta Conversions API "Lead" event with hashed PII
    - Uses the event_id provided by the browser pixel so Meta deduplicates
-   - Hides your GHL webhook URL and Meta access token from the client
+   - Hides your Meta access token and email keys from the client
 
    PLATFORM
    This is written for Vercel (Node.js serverless function). It runs on
@@ -15,7 +15,9 @@
    DEPLOY
    1. Put this file at /api/lead.js in a Vercel project
    2. Set environment variables in Vercel dashboard:
-        GHL_WEBHOOK_URL          your GoHighLevel inbound webhook URL
+        RESEND_API_KEY           from https://resend.com/api-keys
+        LEAD_EMAIL_TO            the email address to receive leads
+        LEAD_EMAIL_FROM          sender address (e.g. leads@debtrexsolutions.com)
         META_PIXEL_ID            your Meta Pixel ID
         META_CAPI_ACCESS_TOKEN   from Events Manager > Settings > CAPI
         META_TEST_EVENT_CODE     (optional) for testing in Events Manager
@@ -52,18 +54,84 @@ function setCors(res, origin) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
 
-// === FORWARD TO GOHIGHLEVEL =================================
-async function forwardToGhl(payload) {
-  const url = process.env.GHL_WEBHOOK_URL;
-  if (!url) return { ok: false, skipped: 'no_ghl_url' };
+// === SEND LEAD VIA EMAIL (RESEND) ===========================
+async function sendLeadEmail(lead) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const to = process.env.LEAD_EMAIL_TO;
+  const from = process.env.LEAD_EMAIL_FROM || 'Debtrex Leads <leads@debtrexsolutions.com>';
+  if (!apiKey || !to) return { ok: false, skipped: 'no_email_config' };
+
+  const tierLabels = {
+    A: '🟢 Tier A — High Value (20 min SLA)',
+    B: '🔵 Tier B — Qualified (45 min SLA)',
+    C: '🟡 Tier C — Lower Priority (90 min SLA)',
+    D: '🔴 Tier D — Disqualified / Nurture'
+  };
+  const tierLabel = tierLabels[lead.tier] || lead.tier || 'Unknown';
+
+  const subject = `New Lead: ${lead.full_name || 'Unknown'} — Tier ${lead.tier || '?'} — ${lead.debt_amount || 'N/A'}`;
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
+      <div style="background: #0B2545; color: white; padding: 20px 24px; border-radius: 8px 8px 0 0;">
+        <h1 style="margin: 0; font-size: 20px;">New Debt Relief Lead</h1>
+        <p style="margin: 6px 0 0; opacity: 0.85; font-size: 14px;">${tierLabel}</p>
+      </div>
+      <div style="border: 1px solid #e0e0e0; border-top: none; padding: 24px; border-radius: 0 0 8px 8px;">
+
+        <h2 style="font-size: 16px; color: #0B2545; border-bottom: 2px solid #13A66B; padding-bottom: 6px;">Contact Info</h2>
+        <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+          <tr><td style="padding: 6px 0; color: #666; width: 140px;">Name</td><td style="padding: 6px 0; font-weight: bold;">${lead.full_name || '—'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Email</td><td style="padding: 6px 0;"><a href="mailto:${lead.email}">${lead.email}</a></td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Phone</td><td style="padding: 6px 0;"><a href="tel:${lead.phone}">${lead.phone}</a></td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">State</td><td style="padding: 6px 0;">${lead.state || '—'}</td></tr>
+        </table>
+
+        <h2 style="font-size: 16px; color: #0B2545; border-bottom: 2px solid #13A66B; padding-bottom: 6px; margin-top: 20px;">Financial Profile</h2>
+        <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+          <tr><td style="padding: 6px 0; color: #666; width: 140px;">Debt Amount</td><td style="padding: 6px 0; font-weight: bold;">${lead.debt_amount || '—'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Debt Type</td><td style="padding: 6px 0;">${lead.debt_type || '—'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Behind on Payments</td><td style="padding: 6px 0;">${lead.behind_on_payments || '—'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Employment</td><td style="padding: 6px 0;">${lead.employment || '—'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Monthly Income</td><td style="padding: 6px 0;">${lead.income || '—'}</td></tr>
+        </table>
+
+        <h2 style="font-size: 16px; color: #0B2545; border-bottom: 2px solid #13A66B; padding-bottom: 6px; margin-top: 20px;">Lead Details</h2>
+        <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+          <tr><td style="padding: 6px 0; color: #666; width: 140px;">Tier</td><td style="padding: 6px 0; font-weight: bold;">${tierLabel}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">TCPA Consent</td><td style="padding: 6px 0;">${lead.tcpa_consent ? '✅ Yes' : '❌ No'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Consent Text</td><td style="padding: 6px 0; font-size: 12px; color: #888;">${lead.tcpa_language || '—'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Submitted</td><td style="padding: 6px 0;">${lead.server_timestamp || new Date().toISOString()}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">IP Address</td><td style="padding: 6px 0;">${lead.server_ip || '—'}</td></tr>
+        </table>
+
+        ${lead.utm_source || lead.utm_campaign ? `
+        <h2 style="font-size: 16px; color: #0B2545; border-bottom: 2px solid #13A66B; padding-bottom: 6px; margin-top: 20px;">Attribution</h2>
+        <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+          ${lead.utm_source ? `<tr><td style="padding: 6px 0; color: #666; width: 140px;">Source</td><td style="padding: 6px 0;">${lead.utm_source}</td></tr>` : ''}
+          ${lead.utm_medium ? `<tr><td style="padding: 6px 0; color: #666;">Medium</td><td style="padding: 6px 0;">${lead.utm_medium}</td></tr>` : ''}
+          ${lead.utm_campaign ? `<tr><td style="padding: 6px 0; color: #666;">Campaign</td><td style="padding: 6px 0;">${lead.utm_campaign}</td></tr>` : ''}
+          ${lead.utm_content ? `<tr><td style="padding: 6px 0; color: #666;">Content</td><td style="padding: 6px 0;">${lead.utm_content}</td></tr>` : ''}
+          ${lead.fbclid ? `<tr><td style="padding: 6px 0; color: #666;">FB Click ID</td><td style="padding: 6px 0; font-size: 12px;">${lead.fbclid}</td></tr>` : ''}
+        </table>
+        ` : ''}
+
+      </div>
+      <p style="font-size: 11px; color: #999; text-align: center; margin-top: 12px;">Sent by Debtrex Solutions lead system</p>
+    </div>
+  `;
 
   try {
-    const r = await fetch(url, {
+    const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ from, to, subject, html })
     });
-    return { ok: r.ok, status: r.status };
+    const data = await r.json();
+    return { ok: r.ok, status: r.status, id: data.id };
   } catch (err) {
     return { ok: false, error: err.message };
   }
@@ -203,8 +271,8 @@ module.exports = async (req, res) => {
   };
 
   // Fire both in parallel; don't block on slow upstreams
-  const [ghlResult, metaResult] = await Promise.all([
-    forwardToGhl(enriched),
+  const [emailResult, metaResult] = await Promise.all([
+    sendLeadEmail(enriched),
     fireMetaCapiLead(enriched, req)
   ]);
 
@@ -212,7 +280,7 @@ module.exports = async (req, res) => {
   console.log('[Debtrex lead]', {
     tier: enriched.tier,
     email_hash: sha256(enriched.email)?.slice(0, 8),
-    ghl: ghlResult.ok,
+    email: emailResult.ok,
     meta: metaResult.ok
   });
 
@@ -220,7 +288,7 @@ module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   return res.end(JSON.stringify({
     ok: true,
-    ghl: ghlResult.ok,
+    email: emailResult.ok,
     meta: metaResult.ok,
     event_id: enriched.event_id || null
   }));
