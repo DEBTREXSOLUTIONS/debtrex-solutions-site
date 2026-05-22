@@ -82,9 +82,11 @@ async function sendLeadEmail(lead) {
         <h2 style="font-size: 16px; color: #0B2545; border-bottom: 2px solid #13A66B; padding-bottom: 6px;">Contact Info</h2>
         <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
           <tr><td style="padding: 6px 0; color: #666; width: 140px;">Name</td><td style="padding: 6px 0; font-weight: bold;">${lead.full_name || '—'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Date of Birth</td><td style="padding: 6px 0;">${lead.dob || '—'}</td></tr>
           <tr><td style="padding: 6px 0; color: #666;">Email</td><td style="padding: 6px 0;"><a href="mailto:${lead.email}">${lead.email}</a></td></tr>
           <tr><td style="padding: 6px 0; color: #666;">Phone</td><td style="padding: 6px 0;"><a href="tel:${lead.phone}">${lead.phone}</a></td></tr>
           <tr><td style="padding: 6px 0; color: #666;">State</td><td style="padding: 6px 0;">${lead.state || '—'}</td></tr>
+          <tr><td style="padding: 6px 0; color: #666;">Address</td><td style="padding: 6px 0;">${lead.address || '—'}</td></tr>
         </table>
 
         <h2 style="font-size: 16px; color: #0B2545; border-bottom: 2px solid #13A66B; padding-bottom: 6px; margin-top: 20px;">Financial Profile</h2>

@@ -84,12 +84,10 @@ async function sendPartnerEmail(app, meta) {
         <h2 style="font-size:16px;color:#0B2545;border-bottom:2px solid #13A66B;padding-bottom:6px;">Applicant</h2>
         <table style="width:100%;font-size:14px;border-collapse:collapse;">
           ${row('Name', app.name)}
-          ${row('Date of Birth', app.dob)}
           ${row('Company / Business', app.company)}
           ${app.email ? `<tr><td style="padding:6px 0;color:#666;width:170px;">Email</td><td style="padding:6px 0;"><a href="mailto:${esc(app.email)}">${esc(app.email)}</a></td></tr>` : ''}
           ${app.phone ? `<tr><td style="padding:6px 0;color:#666;">Phone</td><td style="padding:6px 0;"><a href="tel:${esc(app.phone)}">${esc(app.phone)}</a></td></tr>` : ''}
           ${app.company_website ? `<tr><td style="padding:6px 0;color:#666;">Website</td><td style="padding:6px 0;">${esc(app.company_website)}</td></tr>` : ''}
-          ${row('Address', app.address)}
         </table>
 
         <h2 style="font-size:16px;color:#0B2545;border-bottom:2px solid #13A66B;padding-bottom:6px;margin-top:20px;">Partnership Details</h2>

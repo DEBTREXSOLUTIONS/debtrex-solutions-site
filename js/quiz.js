@@ -103,13 +103,19 @@
 
     if (n === 7) {
       const name = pane.querySelector('#first_name');
+      const dob = pane.querySelector('#dob');
       const phone = pane.querySelector('#phone');
       const email = pane.querySelector('#email');
+      const address = pane.querySelector('#address');
       const consent = pane.querySelector('#tcpa_consent');
       let ok = true;
 
       if (!name.value.trim() || name.value.trim().length < 2) {
         name.parentElement.classList.add('error'); ok = false;
+      }
+
+      if (!dob.value) {
+        dob.parentElement.classList.add('error'); ok = false;
       }
 
       const digits = phone.value.replace(/\D/g, '');
@@ -122,6 +128,10 @@
         email.parentElement.classList.add('error'); ok = false;
       }
 
+      if (address.value.trim().length < 5) {
+        address.parentElement.classList.add('error'); ok = false;
+      }
+
       if (!consent.checked) {
         const consentBlock = pane.querySelector('.consent-block');
         consentBlock.style.borderColor = '#C0392B';
@@ -132,9 +142,11 @@
       if (!ok) return false;
 
       answers.full_name = name.value.trim();
+      answers.dob = dob.value;
       answers.phone = digits;
       answers.phone_formatted = formatPhone(digits);
       answers.email = email.value.trim().toLowerCase();
+      answers.address = address.value.trim();
       answers.tcpa_consent = true;
       answers.consent_text = consent.parentElement.querySelector('span').innerText.trim().replace(/\s+/g, ' ');
       answers.consent_timestamp = new Date().toISOString();
