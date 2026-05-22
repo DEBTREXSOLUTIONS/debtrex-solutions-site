@@ -14,19 +14,20 @@
   <meta property="og:title" content="Debtrex Solutions — Financial Hardship & Debt Relief Consultation">
   <meta property="og:description" content="Explore your debt relief options with a free, confidential 2-minute assessment. Educational, not pressured.">
   <meta property="og:url" content="https://debtrexsolutions.com/">
-  <meta property="og:image" content="https://debtrexsolutions.com/assets/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://debtrexsolutions.com/assets/banner.png">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Debtrex Solutions — Debt Relief Consultation">
   <meta name="twitter:description" content="A free, confidential 2-minute assessment to understand your debt relief options.">
-  <meta name="twitter:image" content="https://debtrexsolutions.com/assets/og-image.png">
+  <meta name="twitter:image" content="https://debtrexsolutions.com/assets/banner.png">
 
   <!-- Theme color -->
-  <meta name="theme-color" content="#0B2545">
+  <meta name="theme-color" content="#14276E">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
 
   <!-- JSON-LD Organization -->
   <script type="application/ld+json">
@@ -39,10 +40,21 @@
     "logo": "https://debtrexsolutions.com/assets/logo.png",
     "description": "Financial hardship evaluation and debt relief consultation platform.",
     "areaServed": "US",
+    "email": "info@debtrexsolutions.com",
+    "telephone": "+1-307-454-0601",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "5830 E 2nd St, Ste 7000 #35655",
+      "addressLocality": "Casper",
+      "addressRegion": "WY",
+      "postalCode": "82609",
+      "addressCountry": "US"
+    },
     "contactPoint": [{
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "email": "hello@debtrexsolutions.com",
+      "telephone": "+1-307-454-0601",
+      "email": "info@debtrexsolutions.com",
       "areaServed": "US",
       "availableLanguage": ["English"]
     }]
@@ -51,7 +63,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -60,14 +72,18 @@
   <header class="nav">
     <div class="nav-inner">
       <a href="index.html" class="brand">
-        <span class="brand-mark">D</span>
+        <img src="assets/logo.png" alt="" class="brand-mark">
         Debtrex Solutions
       </a>
       <nav class="nav-links">
         <a href="#how-it-works">How It Works</a>
         <a href="#options">Your Options</a>
-        <a href="#qualify">Who Qualifies</a>
+        <a href="blog.html">Guides</a>
         <a href="#faq">FAQ</a>
+        <a href="tel:+13074540601" class="nav-phone" aria-label="Call Debtrex Solutions">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span class="nav-phone-text">(307) 454-0601</span>
+        </a>
         <a href="quiz.html" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.95rem;">Take Free Assessment</a>
       </nav>
     </div>
@@ -75,6 +91,11 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero">
+    <div class="container">
+      <div class="hero-banner">
+        <img src="assets/banner.png" alt="Debtrex Solutions — Relife. Freedom. A Fresh Start.">
+      </div>
+    </div>
     <div class="container hero-grid">
       <div>
         <span class="eyebrow">Free Educational Consultation</span>
@@ -114,7 +135,10 @@
   <!-- ===== DISCLAIMER BAND ===== -->
   <div class="disclaimer-band">
     <div class="container">
-      <p><strong>Important:</strong> Debtrex Solutions is not a law firm and does not provide legal advice. We are not affiliated with any government agency. Not all consumers qualify for debt relief programs. Results vary based on individual financial circumstances.</p>
+      <p>
+        <span class="disclaimer-label">Important Disclosure</span>
+        Debtrex Solutions is not a law firm, debt collector, or government agency and does not guarantee any specific savings or outcome. Debt relief programs are not right for everyone and may affect your credit. Not all consumers qualify. <a href="disclosures.html">Read full disclosures</a>.
+      </p>
     </div>
   </div>
 
@@ -196,7 +220,7 @@
 
       <div class="grid-2">
         <div class="card">
-          <h3 style="color: var(--green-dark);">Typical profile that may qualify</h3>
+          <h3 style="color: var(--sky-dark);">Typical profile that may qualify</h3>
           <ul style="padding-left: 20px; color: var(--text-muted); margin: 0;">
             <li>$10,000 or more in unsecured debt (credit cards, personal loans, collections)</li>
             <li>Experiencing genuine financial hardship</li>
@@ -225,7 +249,7 @@
       <div class="cta-banner">
         <h2>Ready to see your options?</h2>
         <p>Take the free, confidential assessment. It takes about 2 minutes and there's no obligation to enroll in anything.</p>
-        <a href="quiz.html" class="btn btn-primary btn-lg" style="background: var(--green);">See If You May Qualify</a>
+        <a href="quiz.html" class="btn btn-primary btn-lg">See If You May Qualify</a>
       </div>
     </div>
   </section>
@@ -314,16 +338,23 @@
       <div class="footer-grid">
         <div>
           <div class="brand" style="color: var(--white); margin-bottom: 14px;">
-            <span class="brand-mark">D</span>
+            <img src="assets/logo.png" alt="" class="brand-mark">
             Debtrex Solutions
           </div>
           <p style="color: rgba(255,255,255,0.6); font-size: 0.88rem;">
             A financial hardship evaluation and debt relief consultation platform helping consumers understand their options.
           </p>
+          <address class="footer-contact">
+            <span class="footer-contact-addr">5830 E 2nd St, Ste 7000 #35655<br>Casper, WY 82609</span>
+            <a href="tel:+13074540601">(307) 454-0601</a>
+            <a href="tel:+16282328654">(628) 232-8654</a>
+            <a href="mailto:info@debtrexsolutions.com">info@debtrexsolutions.com</a>
+          </address>
         </div>
         <div>
           <h4>Explore</h4>
           <ul class="footer-links">
+            <li><a href="blog.html">Debt Relief Guides</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#options">Your Options</a></li>
             <li><a href="#qualify">Who Qualifies</a></li>
@@ -342,7 +373,7 @@
           <h4>Get Started</h4>
           <ul class="footer-links">
             <li><a href="quiz.html">Free Assessment</a></li>
-            <li><a href="mailto:hello@debtrexsolutions.com">Contact Us</a></li>
+            <li><a href="mailto:info@debtrexsolutions.com">Contact Us</a></li>
           </ul>
         </div>
       </div>
