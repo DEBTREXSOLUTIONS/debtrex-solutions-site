@@ -58,7 +58,7 @@ function setCors(res, origin) {
 async function sendLeadEmail(lead) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.LEAD_EMAIL_TO;
-  const from = process.env.LEAD_EMAIL_FROM || 'Debtrex Leads <leads@debtrexsolutions.com>';
+  const from = process.env.LEAD_EMAIL_FROM || 'Debtrex Leads <notifications@leads.debtrexsolutions.com>';
   if (!apiKey || !to) return { ok: false, skipped: 'no_email_config' };
 
   const tierLabels = {

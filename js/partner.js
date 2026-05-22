@@ -97,6 +97,8 @@
       phone: field('phone').value.trim(),
       partner_track: track.value,
       company_website: field('company_website').value.trim(),
+      dob: field('dob').value.trim(),
+      address: field('address').value.trim(),
       states: field('states').value.trim(),
       volume: field('volume').value.trim(),
       message: field('message').value.trim(),

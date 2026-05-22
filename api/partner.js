@@ -59,7 +59,7 @@ function isRateLimited(ip) {
 async function sendPartnerEmail(app, meta) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.PARTNER_EMAIL_TO || process.env.LEAD_EMAIL_TO || 'info@debtrexsolutions.com';
-  const from = process.env.LEAD_EMAIL_FROM || 'Debtrex Partners <partners@debtrexsolutions.com>';
+  const from = process.env.LEAD_EMAIL_FROM || 'Debtrex Partners <notifications@leads.debtrexsolutions.com>';
   if (!apiKey) return { ok: false, skipped: 'no_email_config' };
 
   const subject = `New Partner Application: ${app.name || 'Unknown'} — ${app.partner_track || 'Unspecified'}`;
@@ -84,10 +84,12 @@ async function sendPartnerEmail(app, meta) {
         <h2 style="font-size:16px;color:#0B2545;border-bottom:2px solid #13A66B;padding-bottom:6px;">Applicant</h2>
         <table style="width:100%;font-size:14px;border-collapse:collapse;">
           ${row('Name', app.name)}
+          ${row('Date of Birth', app.dob)}
           ${row('Company / Business', app.company)}
           ${app.email ? `<tr><td style="padding:6px 0;color:#666;width:170px;">Email</td><td style="padding:6px 0;"><a href="mailto:${esc(app.email)}">${esc(app.email)}</a></td></tr>` : ''}
           ${app.phone ? `<tr><td style="padding:6px 0;color:#666;">Phone</td><td style="padding:6px 0;"><a href="tel:${esc(app.phone)}">${esc(app.phone)}</a></td></tr>` : ''}
           ${app.company_website ? `<tr><td style="padding:6px 0;color:#666;">Website</td><td style="padding:6px 0;">${esc(app.company_website)}</td></tr>` : ''}
+          ${row('Address', app.address)}
         </table>
 
         <h2 style="font-size:16px;color:#0B2545;border-bottom:2px solid #13A66B;padding-bottom:6px;margin-top:20px;">Partnership Details</h2>
@@ -191,7 +193,9 @@ module.exports = async (req, res) => {
   console.log('[Debtrex partner]', {
     track: app.partner_track,
     email_ok: result.ok,
-    skipped: result.skipped || null
+    skipped: result.skipped || null,
+    resend_status: result.status || null,
+    resend_error: result.error || null
   });
 
   // Email config missing — accept the request so the form still works,
