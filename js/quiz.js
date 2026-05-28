@@ -258,10 +258,12 @@
     try {
       sessionStorage.setItem('debtrex_tier',        tierInfo.tier);
       sessionStorage.setItem('debtrex_name',        answers.full_name   || '');
-      // ── NEW: needed by thank-you.html for CuraDebt qualification check ──
+      // ── needed by thank-you.html for CuraDebt qualification check ──
       sessionStorage.setItem('debtrex_debt_amount', answers.debt_amount || '');
       sessionStorage.setItem('debtrex_employment',  answers.employment  || '');
       sessionStorage.setItem('debtrex_debt_type',   answers.debt_type   || '');
+      // ── state: used to block CuraDebt card for the 11 excluded states ──
+      sessionStorage.setItem('debtrex_state',       answers.state       || '');
     } catch (_) {}
 
     window.location.href = 'thank-you.html';
