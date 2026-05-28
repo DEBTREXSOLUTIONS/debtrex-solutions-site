@@ -185,6 +185,18 @@
       <li>No upfront fees to apply</li>
       <li>Speak with a specialist today</li>
     </ul>
+
+    <!-- ── MANDATORY DISCLOSURE — required by CuraDebt Affiliate Program Terms ── -->
+    <div style="background:#f8faff;border:1px solid #d1d9f0;border-radius:8px;padding:12px 14px;margin:0 0 18px;font-size:0.78rem;color:#374151;line-height:1.55;">
+      <strong style="display:block;margin-bottom:4px;color:#14276E;">Program eligibility notice</strong>
+      Free quote requests are only available in eligible states (see exclusions). The program is for those
+      with at least $10,000 in unsecured (or tax) debt. We cannot help with secured debts such as
+      mortgages, auto loans, or student loans. Applicants must be 21 or older and have a source of income
+      to make program payments. After submitting your info, CuraDebt will contact you with your free
+      savings estimate.
+    </div>
+    <!-- ── END MANDATORY DISCLOSURE ── -->
+
     <a
       id="curaDebtLink"
       href="#"
@@ -195,8 +207,10 @@
       Check My Eligibility with CuraDebt →
     </a>
     <p class="offer-disclaimer">
-      Debtrex Solutions may earn a referral fee if you enroll. CuraDebt is an independent third party.
-      Not all applicants qualify. Results vary.
+      Debtrex Solutions is an independent referral and matching service — not CuraDebt, a law firm, or a
+      government agency. Debtrex Solutions may earn a referral commission if you enroll through this link,
+      at no cost to you. Not all applicants qualify. Results vary based on individual circumstances.
+      Debt relief programs may negatively impact your credit score.
     </p>
   </div>
   <!-- ── End CuraDebt Offer Card ─────────────────────────────────── -->
@@ -242,21 +256,30 @@
   var CURADEBT_AFFILIATE_URL = 'https://www.awin1.com/awclick.php?gid=531679&mid=88085&awinaffid=2903063&linkid=4055733&clickref=';
 
   // ── QUALIFICATION LOGIC ────────────────────────────────────────────
-  // Mirrors your quiz fields. A lead qualifies for the CuraDebt card when:
-  //   1. Their tier is A or B  (already scored as good fits)
-  //   2. Debt amount is $10k+  (CuraDebt minimum requirement)
-  //   3. Not unemployed        (needs income to fund a settlement program)
-  //   4. Debt is unsecured     (credit cards, loans, collections, medical, mixed)
-  function isQualifiedForCuraDebt(tier, debtAmount, employment, debtType) {
+  // A lead qualifies for the CuraDebt card when ALL of these pass:
+  //   1. Tier A or B            (scored as a good fit by the quiz)
+  //   2. Debt $10k+             (CuraDebt minimum; $10k-$20k earns CPA fallback)
+  //   3. Not unemployed         (needs income to fund a settlement program)
+  //   4. Unsecured debt type    (credit cards, loans, collections, medical, mixed)
+  //   5. Not in an excluded state (CT, GA, IL, KS, ME, NH, NV, OR, SC, VT, WV)
+  //      Per CuraDebt Affiliate Program Guide — pixel will not fire for these states
+  function isQualifiedForCuraDebt(tier, debtAmount, employment, debtType, state) {
     var qualifiedTiers    = ['A', 'B'];
     var qualifiedDebt     = ['10k_20k', '20k_50k', '50k_plus'];
     var disqualifiedJobs  = ['unemployed'];
     var qualifiedDebtType = ['credit_cards', 'personal_loans', 'collections', 'medical', 'multiple'];
+    // Full state names matching the quiz <select> options
+    var excludedStates    = [
+      'Connecticut', 'Georgia', 'Illinois', 'Kansas', 'Maine',
+      'New Hampshire', 'Nevada', 'Oregon', 'South Carolina',
+      'Vermont', 'West Virginia'
+    ];
 
-    if (!qualifiedTiers.includes(tier))      return false;
-    if (!qualifiedDebt.includes(debtAmount)) return false;
-    if (disqualifiedJobs.includes(employment)) return false;
-    if (!qualifiedDebtType.includes(debtType)) return false;
+    if (!qualifiedTiers.includes(tier))          return false;
+    if (!qualifiedDebt.includes(debtAmount))     return false;
+    if (disqualifiedJobs.includes(employment))   return false;
+    if (!qualifiedDebtType.includes(debtType))   return false;
+    if (state && excludedStates.includes(state)) return false;
 
     return true;
   }
@@ -271,6 +294,7 @@
     var debtAmount = sessionStorage.getItem('debtrex_debt_amount');
     var employment = sessionStorage.getItem('debtrex_employment');
     var debtType   = sessionStorage.getItem('debtrex_debt_type');
+    var state      = sessionStorage.getItem('debtrex_state');
 
     // Fire Meta Lead pixel event (consent-gated inside debtrexFireLead)
     if (typeof window.debtrexFireLead === 'function') {
@@ -301,7 +325,7 @@
     }
 
     // ── Show CuraDebt card for qualified leads ──────────────────────
-    if (isQualifiedForCuraDebt(tier, debtAmount, employment, debtType)) {
+    if (isQualifiedForCuraDebt(tier, debtAmount, employment, debtType, state)) {
       // Set the affiliate link
       var link = document.getElementById('curaDebtLink');
       if (CURADEBT_AFFILIATE_URL && CURADEBT_AFFILIATE_URL !== 'YOUR_AWIN_CURADEBT_LINK_HERE') {
