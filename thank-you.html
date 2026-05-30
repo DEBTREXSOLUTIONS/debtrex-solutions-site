@@ -1,101 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You | Debtrex Solutions</title>
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="theme-color" content="#14276E">
-  <link rel="icon" type="image/png" href="assets/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You | Debtrex Solutions</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#14276E">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+  /* ── CuraDebt Offer Card ─────────────────────────────────────────── */
+  .curadebt-offer {
+    display: none; /* hidden by default; JS shows it for Tier A/B only */
+    background: #ffffff;
+    border: 2px solid #14276E;
+    border-radius: 12px;
+    padding: 28px 28px 24px;
+    margin: 32px auto;
+    max-width: 600px;
+    text-align: left;
+    box-shadow: 0 4px 24px rgba(20, 39, 110, 0.10);
+    animation: fadeSlideIn 0.5s ease both;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .curadebt-offer .offer-badge {
+    display: inline-block;
+    background: #14276E;
+    color: #fff;
+    font-size: 0.70rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+
+  .curadebt-offer h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 10px;
+    line-height: 1.35;
+  }
+
+  .curadebt-offer p {
+    font-size: 0.92rem;
+    color: #4B5563;
+    margin: 0 0 8px;
+    line-height: 1.6;
+  }
+
+  .curadebt-offer ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 20px;
+  }
+
+  .curadebt-offer ul li {
+    font-size: 0.88rem;
+    color: #374151;
+    padding: 4px 0;
+    padding-left: 22px;
+    position: relative;
+  }
+
+  .curadebt-offer ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #16a34a;
+    font-weight: 700;
+  }
+
+  .curadebt-offer .btn-curadebt {
+    display: inline-block;
+    background: #14276E;
+    color: #fff !important;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.18s, transform 0.15s;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+
+  .curadebt-offer .btn-curadebt:hover {
+    background: #0f1e57;
+    transform: translateY(-1px);
+  }
+
+  .curadebt-offer .offer-disclaimer {
+    font-size: 0.73rem;
+    color: #9CA3AF;
+    margin: 8px 0 0;
+    line-height: 1.5;
+  }
+
+  .offer-divider {
+    display: none; /* shown with the card */
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9CA3AF;
+    margin: 28px 0 0;
+  }
+
+  .offer-divider span {
+    background: #f9fafb;
+    padding: 0 12px;
+    position: relative;
+  }
+
+  /* Responsive */
+  @media (max-width: 520px) {
+    .curadebt-offer {
+      padding: 20px 18px 18px;
+    }
+    .curadebt-offer h3 {
+      font-size: 1.1rem;
+    }
+  }
+</style>
 </head>
+
 <body>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="" class="brand-mark">
+      Debtrex Solutions
+    </a>
+  </div>
+</header>
 
-  <header class="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="brand">
-        <img src="assets/logo.png" alt="" class="brand-mark">
-        Debtrex Solutions
-      </a>
-    </div>
-  </header>
+<main class="thanks">
+  <div class="thanks-mark">✓</div>
+  <h1 id="greeting">Thank you — your assessment is in.</h1>
 
-  <main class="thanks">
-    <div class="thanks-mark">✓</div>
-    <h1 id="greeting">Thank you — your assessment is in.</h1>
-    <p id="tierMessage" style="font-size: 1.1rem; color: var(--text-muted);">
-      A debt relief consultant will review your information and reach out shortly to walk you through your options.
+  <p id="tierMessage" style="font-size: 1.1rem; color: var(--text-muted);">
+    A debt relief consultant will review your information and reach out shortly to walk you through your options.
+  </p>
+
+  <div class="card" style="text-align: left; margin: 36px 0; padding: 28px;">
+    <h3 style="margin-bottom: 12px;">What happens next</h3>
+    <ol style="padding-left: 20px; color: var(--text-muted); margin: 0;">
+      <li style="margin-bottom: 10px;">A consultant reviews your assessment.</li>
+      <li style="margin-bottom: 10px;">You receive a call from a Debtrex consultant — please answer or save the number.</li>
+      <li style="margin-bottom: 10px;">During the call you'll learn about programs you may qualify for, their pros and cons, and what enrolling would involve.</li>
+      <li>If a program is a good fit, the consultant will explain next steps. You're under no obligation.</li>
+    </ol>
+  </div>
+
+  <!-- ── CuraDebt Offer Card (shown only for Tier A & B) ─────────── -->
+  <div class="offer-divider" id="offerDivider">
+    <span>While you wait — one more option to explore</span>
+  </div>
+
+  <div class="curadebt-offer" id="curaDebtCard">
+    <div class="offer-badge">Recommended Partner</div>
+    <h3>See if you qualify for CuraDebt's debt relief program</h3>
+    <p>
+      Based on your responses, you may also qualify directly through CuraDebt — one of the most established debt relief providers in the US (25+ years, BBB A+).
     </p>
+    <ul>
+      <li>Free, no-obligation consultation</li>
+      <li>Covers credit cards, personal loans, medical bills &amp; collections</li>
+      <li>No upfront fees to apply</li>
+      <li>Speak with a specialist today</li>
+    </ul>
 
-    <div class="card" style="text-align: left; margin: 36px 0; padding: 28px;">
-      <h3 style="margin-bottom: 12px;">What happens next</h3>
-      <ol style="padding-left: 20px; color: var(--text-muted); margin: 0;">
-        <li style="margin-bottom: 10px;">A consultant reviews your assessment.</li>
-        <li style="margin-bottom: 10px;">You receive a call from a Debtrex consultant — please answer or save the number.</li>
-        <li style="margin-bottom: 10px;">During the call you'll learn about programs you may qualify for, their pros and cons, and what enrolling would involve.</li>
-        <li>If a program is a good fit, the consultant will explain next steps. You're under no obligation.</li>
-      </ol>
+    <!-- ── MANDATORY DISCLOSURE — required by CuraDebt Affiliate Program Terms ── -->
+    <div style="background:#f8faff;border:1px solid #d1d9f0;border-radius:8px;padding:12px 14px;margin:0 0 18px;font-size:0.78rem;color:#374151;line-height:1.55;">
+      <strong style="display:block;margin-bottom:4px;color:#14276E;">Program eligibility notice</strong>
+      Free quote requests are only available in eligible states (see exclusions). The program is for those
+      with at least $10,000 in unsecured (or tax) debt. We cannot help with secured debts such as
+      mortgages, auto loans, or student loans. Applicants must be 21 or older and have a source of income
+      to make program payments. After submitting your info, CuraDebt will contact you with your free
+      savings estimate.
     </div>
+    <!-- ── END MANDATORY DISCLOSURE ── -->
 
-    <p style="font-size: 0.85rem; color: var(--text-light);">
-      Reminder: Debtrex Solutions is not a law firm and is not affiliated with any government agency.
-      Not all consumers qualify for debt relief programs. Results vary based on individual circumstances.
-      Debt relief programs may negatively impact your credit.
+    <a
+      id="curaDebtLink"
+      href="#"
+      class="btn-curadebt"
+      target="_blank"
+      rel="noopener sponsored"
+    >
+      Check My Eligibility with CuraDebt →
+    </a>
+    <p class="offer-disclaimer">
+      Debtrex Solutions is an independent referral and matching service — not CuraDebt, a law firm, or a
+      government agency. Debtrex Solutions may earn a referral commission if you enroll through this link,
+      at no cost to you. Not all applicants qualify. Results vary based on individual circumstances.
+      Debt relief programs may negatively impact your credit score.
     </p>
+  </div>
+  <!-- ── End CuraDebt Offer Card ─────────────────────────────────── -->
 
-    <a href="index.html" class="btn btn-secondary" style="margin-top: 24px;">← Back to home</a>
-  </main>
+  <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 28px;">
+    Reminder: Debtrex Solutions is not a law firm and is not affiliated with any government agency.
+    Not all consumers qualify for debt relief programs. Results vary based on individual circumstances.
+    Debt relief programs may negatively impact your credit.
+  </p>
 
-  <footer class="footer" style="padding: 32px 0;">
-    <div class="container">
-      <div class="footer-legal" style="border-top: none; padding-top: 0;">
-        <p>Debtrex Solutions LLC &nbsp;&middot;&nbsp; 5830 E 2nd St, Ste 7000 #35655, Casper, WY 82609 &nbsp;&middot;&nbsp; <a href="tel:+13074540601">(307) 454-0601</a> &nbsp;&middot;&nbsp; <a href="tel:+16282328654">(628) 232-8654</a> &nbsp;&middot;&nbsp; <a href="mailto:info@debtrexsolutions.com">info@debtrexsolutions.com</a></p>
-        <p>© <span id="year">2026</span> Debtrex Solutions LLC. All rights reserved.</p>
-        <p>
-          <a href="privacy.html">Privacy Policy</a> ·
-          <a href="terms.html">Terms of Service</a> ·
-          <a href="disclosures.html">Disclosures</a> ·
-          <a href="cookie-policy.html">Cookie Policy</a>
-        </p>
-        <p>
-          <a href="#" onclick="event.preventDefault(); window.doNotSellOrShare();">Do Not Sell or Share My Personal Information</a>
-          &nbsp;·&nbsp;
-          <a href="#" onclick="event.preventDefault(); window.openCookiePreferences();">Cookie Preferences</a>
-        </p>
-      </div>
+  <a href="index.html" class="btn btn-secondary" style="margin-top: 24px;">← Back to home</a>
+</main>
+
+<footer class="footer" style="padding: 32px 0;">
+  <div class="container">
+    <div class="footer-legal" style="border-top: none; padding-top: 0;">
+      <p>Debtrex Solutions LLC &nbsp;&middot;&nbsp; 5830 E 2nd St, Ste 7000 #35655, Casper, WY 82609 &nbsp;&middot;&nbsp; <a href="tel:+13074540601">(307) 454-0601</a> &nbsp;&middot;&nbsp; <a href="tel:+16282328654">(628) 232-8654</a> &nbsp;&middot;&nbsp; <a href="mailto:info@debtrexsolutions.com">info@debtrexsolutions.com</a></p>
+      <p>© <span id="year">2026</span> Debtrex Solutions LLC. All rights reserved.</p>
+      <p>
+        <a href="privacy.html">Privacy Policy</a> ·
+        <a href="terms.html">Terms of Service</a> ·
+        <a href="disclosures.html">Disclosures</a> ·
+        <a href="cookie-policy.html">Cookie Policy</a>
+      </p>
+      <p>
+        <a href="#" onclick="event.preventDefault(); window.doNotSellOrShare();">Do Not Sell or Share My Personal Information</a>
+        &nbsp;·&nbsp;
+        <a href="#" onclick="event.preventDefault(); window.openCookiePreferences();">Cookie Preferences</a>
+      </p>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script src="js/cookies.js"></script>
-  <script src="js/meta-pixel.js"></script>
-  <script>
-    (function () {
-      document.getElementById('year').textContent = new Date().getFullYear();
+<script src="js/cookies.js"></script>
+<script src="js/meta-pixel.js"></script>
 
-      try {
-        const name = sessionStorage.getItem('debtrex_name');
-        const tier = sessionStorage.getItem('debtrex_tier');
-        const eventId = sessionStorage.getItem('debtrex_event_id');
+<script>
+(function () {
 
-        // Fire Meta Lead event (consent-gated inside debtrexFireLead)
-        // Use the event_id already generated by the quiz so server-side
-        // CAPI can deduplicate against this browser pixel event.
-        if (typeof window.debtrexFireLead === 'function') {
-          window.debtrexFireLead({
-            content_name: 'Debt Relief Assessment',
-            content_category: tier ? ('Tier ' + tier) : 'Lead',
-            value: 0,
-            currency: 'USD'
-          });
-        }
+  // ── CONFIGURATION ──────────────────────────────────────────────────
+  // Paste your full Awin affiliate tracking URL here.
+  // It looks like: https://www.awin1.com/cread.php?awinmid=88085&awinaffid=YOUR_ID&...
+  var CURADEBT_AFFILIATE_URL = 'https://www.awin1.com/awclick.php?gid=531679&mid=88085&awinaffid=2903063&linkid=4055733&clickref=';
 
-        if (name) {
-          document.getElementById('greeting').textContent = `Thank you, ${name.split(' ')[0]} — your assessment is in.`;
-        }
+  // ── QUALIFICATION LOGIC ────────────────────────────────────────────
+  // A lead qualifies for the CuraDebt card when ALL of these pass:
+  //   1. Tier A or B            (scored as a good fit by the quiz)
+  //   2. Debt $10k+             (CuraDebt minimum; $10k-$20k earns CPA fallback)
+  //   3. Not unemployed         (needs income to fund a settlement program)
+  //   4. Unsecured debt type    (credit cards, loans, collections, medical, mixed)
+  //   5. Not in an excluded state (CT, GA, IL, KS, ME, NH, NV, OR, SC, VT, WV)
+  //      Per CuraDebt Affiliate Program Guide — pixel will not fire for these states
+  function isQualifiedForCuraDebt(tier, debtAmount, employment, debtType, state) {
+    var qualifiedTiers    = ['A', 'B'];
+    var qualifiedDebt     = ['10k_20k', '20k_50k', '50k_plus'];
+    var disqualifiedJobs  = ['unemployed'];
+    var qualifiedDebtType = ['credit_cards', 'personal_loans', 'collections', 'medical', 'multiple'];
+    // Full state names matching the quiz <select> options
+    var excludedStates    = [
+      'Connecticut', 'Georgia', 'Illinois', 'Kansas', 'Maine',
+      'New Hampshire', 'Nevada', 'Oregon', 'South Carolina',
+      'Vermont', 'West Virginia'
+    ];
 
+    if (!qualifiedTiers.includes(tier))          return false;
+    if (!qualifiedDebt.includes(debtAmount))     return false;
+    if (disqualifiedJobs.includes(employment))   return false;
+    if (!qualifiedDebtType.includes(debtType))   return false;
+    if (state && excludedStates.includes(state)) return false;
+
+    return true;
+  }
+
+  // ── MAIN ───────────────────────────────────────────────────────────
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  try {
+    var name       = sessionStorage.getItem('debtrex_name');
+    var tier       = sessionStorage.getItem('debtrex_tier');
+    var eventId    = sessionStorage.getItem('debtrex_event_id');
+    var debtAmount = sessionStorage.getItem('debtrex_debt_amount');
+    var employment = sessionStorage.getItem('debtrex_employment');
+    var debtType   = sessionStorage.getItem('debtrex_debt_type');
+    var state      = sessionStorage.getItem('debtrex_state');
+
+    // Fire Meta Lead pixel event (consent-gated inside debtrexFireLead)
+    if (typeof window.debtrexFireLead === 'function') {
+      window.debtrexFireLead({
+        content_name: 'Debt Relief Assessment',
+        content_category: tier ? ('Tier ' + tier) : 'Lead',
+        value: 0,
+        currency: 'USD'
+      });
+    }
+
+    // Personalise the greeting
+    if (name) {
+      document.getElementById('greeting').textContent =
+        'Thank you, ' + name.split(' ')[0] + ' \u2014 your assessment is in.';
+    }
+
+    // Tier-based message
+    var msg = document.getElementById('tierMessage');
+    if (tier === 'A') {
+      msg.innerHTML = '<strong>You may be a strong fit for a consultation.</strong> A consultant will reach out within the next 15\u201320 minutes during business hours.';
+    } else if (tier === 'B') {
+      msg.innerHTML = 'Based on your responses, a consultant will reach out within the next 30\u201345 minutes during business hours to discuss your options.';
+    } else if (tier === 'C') {
+      msg.innerHTML = 'A consultant will follow up with you to discuss whether any of the available options may be appropriate for your situation.';
+    } else if (tier === 'D') {
+      msg.innerHTML = "Based on your responses, a structured debt relief program may not be the best fit right now. We\u2019ll email you educational resources that may be useful \u2014 including credit counseling and budgeting alternatives.";
+    }
+
+    // ── Show CuraDebt card for qualified leads ──────────────────────
+    if (isQualifiedForCuraDebt(tier, debtAmount, employment, debtType, state)) {
+      // Set the affiliate link
+      var link = document.getElementById('curaDebtLink');
+      if (CURADEBT_AFFILIATE_URL && CURADEBT_AFFILIATE_URL !== 'YOUR_AWIN_CURADEBT_LINK_HERE') {
+        link.href = CURADEBT_AFFILIATE_URL;
+      } else {
+        // Fallback: link to CuraDebt directly if URL not configured yet
+        link.href = 'https://www.curadebt.com';
+      }
+
+      // Reveal the card and divider
+      var card    = document.getElementById('curaDebtCard');
+      var divider = document.getElementById('offerDivider');
+      card.style.display    = 'block';
+      divider.style.display = 'block';
+    }
+
+  } catch (e) {
+    // sessionStorage unavailable — fail silently, card stays hidden
+  }
+
+})();
+</script>
+
+<<<<<<< HEAD
         const msg = document.getElementById('tierMessage');
         if (tier === 'A') {
           msg.innerHTML = '<strong>You may be a strong fit for a consultation.</strong> A consultant will reach out within the next 15–20 minutes during business hours.';
@@ -110,5 +364,7 @@
     })();
   </script>
 
+=======
+>>>>>>> 917482602fcb1f538354cd9c790365338ade2fe2
 </body>
 </html>

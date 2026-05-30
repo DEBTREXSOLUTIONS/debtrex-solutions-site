@@ -252,10 +252,18 @@
       // Don't block the user — still proceed to thank-you
     }
 
-    // Stash tier in sessionStorage so thank-you page can show appropriate messaging
+    // Stash data in sessionStorage so thank-you page can:
+    //  - Show the right tier message and personalised greeting
+    //  - Determine whether to show the CuraDebt affiliate offer card
     try {
-      sessionStorage.setItem('debtrex_tier', tierInfo.tier);
-      sessionStorage.setItem('debtrex_name', answers.full_name || '');
+      sessionStorage.setItem('debtrex_tier',        tierInfo.tier);
+      sessionStorage.setItem('debtrex_name',        answers.full_name   || '');
+      // ── needed by thank-you.html for CuraDebt qualification check ──
+      sessionStorage.setItem('debtrex_debt_amount', answers.debt_amount || '');
+      sessionStorage.setItem('debtrex_employment',  answers.employment  || '');
+      sessionStorage.setItem('debtrex_debt_type',   answers.debt_type   || '');
+      // ── state: used to block CuraDebt card for the 11 excluded states ──
+      sessionStorage.setItem('debtrex_state',       answers.state       || '');
     } catch (_) {}
 
     window.location.href = 'thank-you.html';
